@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ledgerly — Finance Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#"><span class="brand-mark">L</span><span>ledgerly</span></a>
+        <button class="month-picker" type="button">August 2026 <span>⌄</span></button>
+        <button class="profile" type="button" aria-label="Account">NS</button>
+      </header>
+
+      <section class="hero">
+        <div><p class="eyebrow">YOUR SPENDING, SIMPLIFIED</p><h1>Good to see you.<br />Here’s your month.</h1></div>
+        <button id="uploadButton" class="button primary" type="button">+ Add invoice</button>
+      </section>
+
+      <section class="summary-grid" aria-label="Monthly spending summary">
+        <article class="total-card"><p>Total spent</p><strong id="totalSpent">₹0</strong><span id="invoiceCount">0 invoices this month</span><div class="wave" aria-hidden="true"></div></article>
+        <article class="category-card food"><span class="icon">🍜</span><div><p>Food</p><strong id="foodTotal">₹0</strong><small id="foodShare">0% of spending</small></div></article>
+        <article class="category-card fuel"><span class="icon">⛽</span><div><p>Fuel</p><strong id="fuelTotal">₹0</strong><small id="fuelShare">0% of spending</small></div></article>
+        <article class="category-card fun"><span class="icon">✦</span><div><p>Fun</p><strong id="funTotal">₹0</strong><small id="funShare">0% of spending</small></div></article>
+      </section>
+
+      <section class="content-grid">
+        <div class="panel expenses-panel">
+          <div class="panel-heading"><div><p class="eyebrow">RECENT ACTIVITY</p><h2>Your invoices</h2></div><button class="text-button" id="clearButton" type="button">Clear all</button></div>
+          <div id="emptyState" class="empty-state"><div class="empty-icon">⌁</div><h3>No invoices yet</h3><p>Upload a receipt or invoice to start tracking your spending.</p><button class="button primary small" type="button" data-upload>Upload your first invoice</button></div>
+          <div id="expenseList" class="expense-list" hidden></div>
+        </div>
+        <aside class="panel guide-panel"><span class="guide-icon">⌁</span><p class="eyebrow">HOW IT WORKS</p><h2>Keep the paper trail light.</h2><ol><li><span>1</span>Drop in any invoice or receipt.</li><li><span>2</span>Tell us the amount and merchant.</li><li><span>3</span>We’ll sort it into Food, Fuel, or Fun.</li></ol><p class="formats">PDF · JPG · JPEG · PNG · WEBP</p></aside>
+      </section>
+    </main>
+
+    <dialog id="invoiceDialog">
+      <form id="invoiceForm" method="dialog">
+        <div class="dialog-heading"><div><p class="eyebrow">NEW EXPENSE</p><h2>Add an invoice</h2></div><button class="close" type="button" id="closeDialog" aria-label="Close">×</button></div>
+        <label class="upload-zone" for="fileInput"><input id="fileInput" type="file" accept=".pdf,image/jpeg,image/png,image/webp" /><span class="upload-symbol">↑</span><strong id="fileLabel">Choose an invoice</strong><small>PDF, JPEG, JPG, PNG or WEBP up to 10MB</small></label>
+        <div class="form-grid"><label>Merchant<input id="merchant" required placeholder="e.g. Café Indigo" /></label><label>Amount (₹)<input id="amount" required min="1" step="0.01" type="number" placeholder="0.00" /></label></div>
+        <div class="form-grid"><label>Date<input id="expenseDate" required type="date" /></label><label>Category<select id="category"><option value="food">Food</option><option value="fuel">Fuel</option><option value="fun">Fun</option></select></label></div>
+        <p class="hint">Tip: we suggest a category from the merchant or file name. You can always change it.</p>
+        <button class="button primary full" type="submit">Save expense</button>
+      </form>
+    </dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
